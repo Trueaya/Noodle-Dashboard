@@ -1,0 +1,45 @@
+# Blueprint de deploy do Noodle Finance no Render.
+# Documentação: https://render.com/docs/blueprint-spec
+#
+# Este arquivo cria um Web Service Node com disco persistente em /var/data.
+# O disco é obrigatório: o banco (db.json) e as sessões ficam nele.
+# Sem disco, todo o cadastro seria apagado a cada deploy/restart.
+
+services:
+  - type: web
+    name: noodle-finance
+    runtime: node
+    plan: starter # plano pago (0.5 CPU / 512 MB). Free NÃO tem disco persistente.
+    region: virginia # us-east, a região dos EUA mais próxima do Brasil
+    branch: main
+    autoDeploy: true
+    buildCommand: npm install --omit=dev
+    startCommand: node server.js
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_VERSION
+        value: 22.11.0
+      - key: HOST
+        value: 0.0.0.0
+      - key: NOODLE_SECURE_COOKIES
+        value: "1"
+      - key: NOODLE_DATA_DIR
+        value: /var/data
+      # Em produção, a conta demo (com senha pública) fica desativada.
+      # Mude para "1" se quiser manter a demonstração no ar.
+      - key: NOODLE_DEMO
+        value: "0"
+      - key: TZ
+        value: America/Sao_Paulo
+      # Preencha estes dois no painel do Render (Environment) depois do primeiro deploy,
+      # ou deixe em branco para usar apenas login por e-mail e senha.
+      - key: GOOGLE_CLIENT_ID
+        sync: false
+      - key: GOOGLE_CLIENT_SECRET
+        sync: false
+      - key: GOOGLE_REDIRECT_URI
+        sync: false
+    disk:
+      name: noodle-data
+      mountPath: /var/data
+      sizeGB: 1

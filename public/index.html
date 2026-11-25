@@ -1,0 +1,361 @@
+<!doctype html>
+<html lang="pt-BR" data-theme="light">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Noodle Finance — seu dinheiro, sem mistério</title>
+    <meta
+      name="description"
+      content="Dashboard financeiro pessoal com controle de salário, contas, gastos e assinaturas. Alertas inteligentes avisam antes do seu orçamento estourar."
+    />
+    <meta name="theme-color" content="#F0EEE6" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#1A1917" media="(prefers-color-scheme: dark)" />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="Noodle Finance" />
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/icons/icon-32.png" />
+    <link rel="icon" type="image/png" sizes="192x192" href="/icons/icon-192.png" />
+    <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png" />
+    <link rel="stylesheet" href="/css/base.css" />
+    <link rel="stylesheet" href="/css/auth.css" />
+    <link rel="stylesheet" href="/css/app.css" />
+    <link rel="stylesheet" href="/css/cards.css" />
+    <link rel="stylesheet" href="/css/reports-settings.css" />
+    <link rel="stylesheet" href="/css/modals.css" />
+    <link rel="stylesheet" href="/css/responsive.css" />
+    <script type="module" src="/js/app.js"></script>
+  </head>
+  <body>
+    <div class="ambient" aria-hidden="true">
+      <span class="ambient-blob ambient-blob--one"></span>
+      <span class="ambient-blob ambient-blob--two"></span>
+      <span class="ambient-grain"></span>
+    </div>
+
+    <div id="boot" class="boot-screen">
+      <div class="boot-brand">
+        <div id="boot-logo" data-logo="40"></div>
+        <div class="boot-wordmark"><strong>Noodle</strong><span>Finance</span></div>
+      </div>
+      <div class="boot-loader" aria-label="Carregando">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+
+    <section id="auth-view" class="auth-view hidden" aria-label="Acesso à conta">
+      <div class="auth-frame">
+        <aside class="auth-visual">
+          <div class="auth-visual-glow" aria-hidden="true"></div>
+          <div class="auth-visual-grid" aria-hidden="true"></div>
+
+          <div class="auth-visual-head">
+            <div class="brand">
+              <div id="auth-logo" data-logo="40"></div>
+              <div class="brand-text"><strong>Noodle</strong><span>Finance</span></div>
+            </div>
+            <span class="auth-visual-pill"><span class="auth-pill-dot"></span> PWA instalável</span>
+          </div>
+
+          <div class="auth-visual-art" aria-hidden="true">
+            <span class="auth-orbit auth-orbit--one"></span>
+            <span class="auth-orbit auth-orbit--two"></span>
+            <img src="/icons/logo.png" alt="" width="800" height="621" draggable="false" />
+          </div>
+
+          <div class="auth-visual-foot">
+            <span class="auth-kicker">Finanças pessoais, sem sustos</span>
+            <h2>Seu dinheiro,<br /><span>sem mistério.</span></h2>
+            <p>
+              Salário, despesas, contas fixas e assinaturas em um só painel.
+              O Noodle mostra o impacto de cada compromisso antes do seu orçamento apertar.
+            </p>
+            <div class="auth-visual-meta">
+              <span data-icon="lock" data-size="13"></span>
+              <span>Seus dados ficam no seu servidor</span>
+              <span class="auth-meta-sep"></span>
+              <span>Node.js + PWA</span>
+            </div>
+          </div>
+        </aside>
+
+        <main class="auth-side">
+          <div class="auth-mobile-brand">
+            <div data-logo="38"></div>
+            <div class="brand-text"><strong>Noodle</strong><span>Finance</span></div>
+          </div>
+
+          <div class="auth-side-inner">
+            <div id="auth-login-panel" class="auth-panel">
+              <header class="auth-head">
+                <span class="auth-kicker">Acesso à conta</span>
+                <h1 class="auth-title">Entrar na sua conta</h1>
+                <p class="auth-switchline">
+                  Ainda não tem conta?
+                  <button class="auth-link" type="button" data-auth-switch="register">Criar conta</button>
+                </p>
+              </header>
+
+              <div class="form-alert hidden" id="login-error" role="alert"></div>
+
+              <form id="login-form" class="auth-form" novalidate>
+                <div class="field auth-field">
+                  <label class="sr-only" for="login-email">E-mail</label>
+                  <div class="auth-input">
+                    <input id="login-email" name="email" type="email" inputmode="email" autocomplete="email" placeholder="E-mail" required />
+                  </div>
+                </div>
+                <div class="field auth-field">
+                  <label class="sr-only" for="login-password">Senha</label>
+                  <div class="auth-input">
+                    <input id="login-password" name="password" type="password" autocomplete="current-password" placeholder="Sua senha" required />
+                    <button class="auth-eye" type="button" data-password-toggle="login-password" aria-label="Mostrar senha">
+                      <span data-icon="eye" data-size="18"></span>
+                    </button>
+                  </div>
+                </div>
+                <button class="auth-submit" id="login-submit" type="submit">Entrar</button>
+              </form>
+
+              <div class="auth-divider"><span>ou continue com</span></div>
+              <div class="auth-socials">
+                <a class="auth-social-btn" href="/api/auth/google" rel="nofollow">
+                  <svg class="auth-google-icon" viewBox="0 0 18 18" width="18" height="18" aria-hidden="true">
+                  <path fill="#4285F4" d="M17.64 9.205c0-.639-.057-1.252-.164-1.841H9v3.481h4.844a4.14 4.14 0 0 1-1.796 2.716v2.259h2.908c1.702-1.567 2.684-3.875 2.684-6.615z" />
+                  <path fill="#34A853" d="M9 18c2.43 0 4.467-.806 5.956-2.18l-2.908-2.259c-.806.54-1.837.86-3.048.86-2.344 0-4.328-1.584-5.036-3.711H.957v2.332A8.997 8.997 0 0 0 9 18z" />
+                  <path fill="#FBBC05" d="M3.964 10.71A5.41 5.41 0 0 1 3.682 9c0-.593.102-1.17.282-1.71V4.958H.957A8.996 8.996 0 0 0 0 9c0 1.452.348 2.827.957 4.042l3.007-2.332z" />
+                  <path fill="#EA4335" d="M9 3.58c1.321 0 2.508.454 3.44 1.345l2.582-2.58C13.463.891 11.426 0 9 0A8.997 8.997 0 0 0 .957 4.958L3.964 7.29C4.672 5.163 6.656 3.58 9 3.58z" />
+                </svg>
+                  <span>Google</span>
+                </a>
+                <button class="auth-social-btn auth-social-btn--soon" type="button" disabled aria-label="Entrar com Apple — disponível em breve" title="Login com Apple estará disponível em breve">
+                  <svg class="auth-apple-icon" viewBox="0 0 20 24" width="17" height="17" aria-hidden="true">
+                  <path fill="currentColor" d="M16.37 12.04c-.03-2.39 1.95-3.54 2.04-3.6-1.11-1.62-2.83-1.84-3.44-1.86-1.47-.15-2.86.86-3.6.86-.74 0-1.89-.84-3.11-.82-1.6.02-3.07.93-3.89 2.36-1.66 2.88-.42 7.14 1.19 9.48.79 1.14 1.73 2.42 2.97 2.37 1.19-.05 1.64-.77 3.08-.77 1.43 0 1.84.77 3.1.75 1.28-.02 2.09-1.16 2.87-2.3.9-1.31 1.27-2.58 1.29-2.65-.03-.01-2.47-.95-2.5-3.76zM13.99 4.9c.65-.79 1.09-1.88.97-2.97-.94.04-2.08.63-2.75 1.42-.6.69-1.13 1.8-.99 2.87 1.05.08 2.12-.53 2.77-1.32z" />
+                </svg>
+                  <span>Apple</span>
+                  <em>em breve</em>
+                </button>
+              </div>
+
+              <p class="auth-demo">
+                Prefere ver primeiro?
+                <button class="auth-link" id="demo-button" type="button">Explorar demonstração</button>
+              </p>
+            </div>
+
+            <div id="auth-register-panel" class="auth-panel hidden">
+              <header class="auth-head">
+                <span class="auth-kicker">Nova conta</span>
+                <h1 class="auth-title">Criar sua conta</h1>
+                <p class="auth-switchline">
+                  Já tem uma conta?
+                  <button class="auth-link" type="button" data-auth-switch="login">Entrar</button>
+                </p>
+              </header>
+
+              <div class="form-alert hidden" id="register-error" role="alert"></div>
+
+              <form id="register-form" class="auth-form" novalidate>
+                <div class="field auth-field">
+                  <label class="sr-only" for="register-name">Nome completo</label>
+                  <div class="auth-input">
+                    <input id="register-name" name="name" type="text" autocomplete="name" placeholder="Nome completo" required minlength="2" />
+                  </div>
+                </div>
+                <div class="field auth-field">
+                  <label class="sr-only" for="register-email">E-mail</label>
+                  <div class="auth-input">
+                    <input id="register-email" name="email" type="email" inputmode="email" autocomplete="email" placeholder="E-mail" required />
+                  </div>
+                </div>
+                <div class="field auth-field">
+                  <label class="sr-only" for="register-password">Senha</label>
+                  <div class="auth-input">
+                    <input id="register-password" name="password" type="password" autocomplete="new-password" placeholder="Senha (mínimo 8 caracteres)" required minlength="8" />
+                    <button class="auth-eye" type="button" data-password-toggle="register-password" aria-label="Mostrar senha">
+                      <span data-icon="eye" data-size="18"></span>
+                    </button>
+                  </div>
+                </div>
+
+                <div class="field auth-check-field">
+                  <label class="auth-check" for="register-terms">
+                    <input id="register-terms" name="terms" type="checkbox" />
+                    <span class="auth-check-box" aria-hidden="true"><span data-icon="check" data-size="12"></span></span>
+                    <span>Concordo com o armazenamento local dos meus dados financeiros neste servidor.</span>
+                  </label>
+                </div>
+
+                <button class="auth-submit" id="register-submit" type="submit">Criar conta</button>
+              </form>
+
+              <div class="auth-divider"><span>ou cadastre-se com</span></div>
+              <div class="auth-socials">
+                <a class="auth-social-btn" href="/api/auth/google" rel="nofollow">
+                  <svg class="auth-google-icon" viewBox="0 0 18 18" width="18" height="18" aria-hidden="true">
+                  <path fill="#4285F4" d="M17.64 9.205c0-.639-.057-1.252-.164-1.841H9v3.481h4.844a4.14 4.14 0 0 1-1.796 2.716v2.259h2.908c1.702-1.567 2.684-3.875 2.684-6.615z" />
+                  <path fill="#34A853" d="M9 18c2.43 0 4.467-.806 5.956-2.18l-2.908-2.259c-.806.54-1.837.86-3.048.86-2.344 0-4.328-1.584-5.036-3.711H.957v2.332A8.997 8.997 0 0 0 9 18z" />
+                  <path fill="#FBBC05" d="M3.964 10.71A5.41 5.41 0 0 1 3.682 9c0-.593.102-1.17.282-1.71V4.958H.957A8.996 8.996 0 0 0 0 9c0 1.452.348 2.827.957 4.042l3.007-2.332z" />
+                  <path fill="#EA4335" d="M9 3.58c1.321 0 2.508.454 3.44 1.345l2.582-2.58C13.463.891 11.426 0 9 0A8.997 8.997 0 0 0 .957 4.958L3.964 7.29C4.672 5.163 6.656 3.58 9 3.58z" />
+                </svg>
+                  <span>Google</span>
+                </a>
+                <button class="auth-social-btn auth-social-btn--soon" type="button" disabled aria-label="Entrar com Apple — disponível em breve" title="Login com Apple estará disponível em breve">
+                  <svg class="auth-apple-icon" viewBox="0 0 20 24" width="17" height="17" aria-hidden="true">
+                  <path fill="currentColor" d="M16.37 12.04c-.03-2.39 1.95-3.54 2.04-3.6-1.11-1.62-2.83-1.84-3.44-1.86-1.47-.15-2.86.86-3.6.86-.74 0-1.89-.84-3.11-.82-1.6.02-3.07.93-3.89 2.36-1.66 2.88-.42 7.14 1.19 9.48.79 1.14 1.73 2.42 2.97 2.37 1.19-.05 1.64-.77 3.08-.77 1.43 0 1.84.77 3.1.75 1.28-.02 2.09-1.16 2.87-2.3.9-1.31 1.27-2.58 1.29-2.65-.03-.01-2.47-.95-2.5-3.76zM13.99 4.9c.65-.79 1.09-1.88.97-2.97-.94.04-2.08.63-2.75 1.42-.6.69-1.13 1.8-.99 2.87 1.05.08 2.12-.53 2.77-1.32z" />
+                </svg>
+                  <span>Apple</span>
+                  <em>em breve</em>
+                </button>
+              </div>
+
+              <p class="auth-demo auth-demo--note">
+                Você pode exportar ou apagar seus dados quando quiser.
+              </p>
+            </div>
+
+            <p class="auth-legal">Noodle Finance <span>·</span> Gestão financeira pessoal</p>
+          </div>
+        </main>
+      </div>
+    </section>
+    <div id="app-view" class="app-view hidden">
+      <aside class="sidebar" id="sidebar">
+        <div class="sidebar-head">
+          <div class="brand">
+            <div id="app-logo" data-logo="38"></div>
+            <div class="brand-text"><strong>Noodle</strong><span>Finance</span></div>
+          </div>
+          <button class="icon-button sidebar-close" id="sidebar-close" type="button" aria-label="Fechar menu">
+            <span data-icon="x" data-size="18"></span>
+          </button>
+        </div>
+
+        <nav class="sidebar-nav" aria-label="Navegação principal">
+          <p class="nav-label">Menu</p>
+          <button class="nav-item is-active" type="button" data-view="overview">
+            <span data-icon="layout-dashboard" data-size="19"></span>
+            <span>Visão geral</span>
+          </button>
+          <button class="nav-item" type="button" data-view="transactions">
+            <span data-icon="arrow-left-right" data-size="19"></span>
+            <span>Transações</span>
+            <span class="nav-badge hidden" id="nav-transactions-badge">0</span>
+          </button>
+          <button class="nav-item" type="button" data-view="subscriptions">
+            <span data-icon="repeat" data-size="19"></span>
+            <span>Assinaturas</span>
+            <span class="nav-badge hidden" id="nav-subscriptions-badge">0</span>
+          </button>
+          <button class="nav-item" type="button" data-view="reports">
+            <span data-icon="chart-no-axes" data-size="19"></span>
+            <span>Relatórios</span>
+          </button>
+          <button class="nav-item" type="button" data-view="settings">
+            <span data-icon="settings" data-size="19"></span>
+            <span>Configurações</span>
+          </button>
+        </nav>
+
+        <div class="sidebar-health" id="sidebar-health"></div>
+
+        <div class="tip-card">
+          <div class="tip-card-head">
+            <span class="tip-icon" data-icon="sparkles" data-size="16"></span>
+            <span>Dica do Noodle</span>
+          </div>
+          <p>Antes de assinar algo novo, simule o impacto no seu orçamento. O aviso aparece na hora.</p>
+          <button class="tip-link" type="button" data-open-subscription>
+            Simular assinatura
+            <span data-icon="arrow-right" data-size="14"></span>
+          </button>
+        </div>
+
+        <div class="sidebar-foot">
+          <span class="sidebar-foot-note"><i class="status-dot"></i> Dados salvos localmente</span>
+          <span class="sidebar-version">Noodle Finance · v1.0</span>
+        </div>
+      </aside>
+
+      <div class="sidebar-overlay hidden" id="sidebar-overlay"></div>
+
+      <div class="app-main">
+        <header class="topbar">
+          <button class="icon-button mobile-menu" id="mobile-menu" type="button" aria-label="Abrir menu">
+            <span data-icon="menu" data-size="20"></span>
+          </button>
+
+          <div class="search-box">
+            <span class="search-icon" data-icon="search" data-size="17"></span>
+            <input id="global-search" type="search" placeholder="Buscar transações, assinaturas..." autocomplete="off" aria-label="Buscar" />
+            <kbd>Ctrl K</kbd>
+          </div>
+
+          <div class="topbar-actions">
+            <button class="icon-button theme-button" id="theme-toggle" type="button" aria-label="Alternar tema">
+              <span data-theme-icon></span>
+            </button>
+
+            <div class="popover-wrap">
+              <button class="icon-button notif-button" id="notif-button" type="button" aria-label="Notificações" aria-expanded="false">
+                <span data-icon="bell" data-size="19"></span>
+                <span class="notif-badge hidden" id="notif-badge">0</span>
+              </button>
+              <div class="popover notif-panel hidden" id="notif-panel" role="dialog" aria-label="Notificações">
+                <div class="popover-head">
+                  <div>
+                    <strong>Alertas inteligentes</strong>
+                    <span id="notif-subtitle">Tudo em dia por aqui</span>
+                  </div>
+                  <button class="icon-button icon-button--sm" id="notif-close" type="button" aria-label="Fechar notificações">
+                    <span data-icon="x" data-size="15"></span>
+                  </button>
+                </div>
+                <div class="notif-list" id="notif-list"></div>
+                <div class="popover-foot">
+                  <button class="text-button" type="button" data-view="subscriptions">Revisar assinaturas <span data-icon="arrow-right" data-size="14"></span></button>
+                </div>
+              </div>
+            </div>
+
+            <div class="popover-wrap">
+              <button class="user-chip" id="user-button" type="button" aria-expanded="false">
+                <span class="avatar" id="user-avatar">MA</span>
+                <span class="user-meta">
+                  <strong id="user-name">Marina Alves</strong>
+                  <small>Conta pessoal</small>
+                </span>
+                <span class="user-chevron" data-icon="chevron-down" data-size="15"></span>
+              </button>
+              <div class="popover user-menu hidden" id="user-menu" role="menu">
+                <div class="user-menu-head">
+                  <span class="avatar avatar--lg" id="user-menu-avatar">MA</span>
+                  <div>
+                    <strong id="user-menu-name">Marina Alves</strong>
+                    <span id="user-menu-email">demo@noodle.finance</span>
+                  </div>
+                </div>
+                <button class="menu-item" type="button" data-view="settings">
+                  <span data-icon="settings" data-size="16"></span> Configurações
+                </button>
+                <button class="menu-item" type="button" data-view="subscriptions">
+                  <span data-icon="repeat" data-size="16"></span> Minhas assinaturas
+                </button>
+                <div class="menu-sep"></div>
+                <button class="menu-item menu-item--danger" type="button" id="logout-button">
+                  <span data-icon="log-out" data-size="16"></span> Sair da conta
+                </button>
+              </div>
+            </div>
+          </div>
+        </header>
+
+        <div class="view-root" id="view-root"></div>
+      </div>
+    </div>
+
+    <div id="modal-root"></div>
+    <div id="toast-root" class="toast-root" aria-live="polite" aria-atomic="false"></div>
+  </body>
+</html>

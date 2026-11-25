@@ -1,0 +1,9 @@
+node_modules
+.data
+.env
+*.log
+.git
+.gitignore
+DEPLOY.md
+GUIA-DO-APP.md
+ARQUITETURA.md
